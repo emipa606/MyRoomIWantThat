@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>MyRoom - I want that (Continued)</name>
+  <packageId>Mlie.MyRoomIWantThat</packageId>
+  <author>AliceCecil</author>
+  <url>https://github.com/emipa606/MyRoomIWantThat</url>
+  <supportedVersions>
+    <li>1.0</li>
+    <li>1.1</li>
+    <li>1.2</li>
+  </supportedVersions>
+  <modDependencies />
+  <loadAfter />
+  <description>[img]https://i.imgur.com/WAEzk68.png[/img]
+Update of AliceCecils mod
+https://steamcommunity.com/sharedfiles/filedetails/?id=1541796376
+
+- Added setting for level of impressiveness wanted
+- Pawns will not place larger items where they block the doorway
+- Pawns will try to place items along the wall if possible
+- Rotatable objects placed along a wall will face outwards
+- Pawns will not add beds to their room (I will see if I can make them replace their bed instead)
+
+[img]https://i.imgur.com/7Gzt3Rg.png[/img]
+
+[table]
+    [tr]
+        [td][url=https://invite.gg/Mlie][img]https://i.imgur.com/zdzzBrc.png[/img][/url][/td]
+        [td][url=https://github.com/emipa606/MyRoomIWantThat][img]https://i.imgur.com/kTkpTOE.png[/img][/url][/td]
+    [/tr]
+[/table]
+	
+[img]https://i.imgur.com/NOW7jU1.png[/img]
+Pawns do stuff to their own rooms from available minified things.
+
+
+Right now on rare tick pawn will look for a minified thing they find beautiful to make their room impressive up to their threshold. 
+ie normal folks like an Impressive Room and will install art you got lying around to get there. 
+and Greedy people will always. 
+and Astetics will never.
+
+pawns will rarely rearrange their rooms as well.
+
+[img]https://i.imgur.com/Rs6T6cr.png[/img]
+[list]
+[*] See if the the error persists if you just have this mod and its requirements active.
+[*] If not, try adding your other mods until it happens again.
+[*] Post your error-log using [url=https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib[/url] and command Ctrl+F12
+[*] For best support, please use the Discord-channel for error-reporting.
+[*] Do not report errors by making a discussion-thread, I get no notification of that.
+[*] If you have the solution for a problem, please post it to the GitHub repository.
+[/list]
+</description>
+</ModMetaData>
+

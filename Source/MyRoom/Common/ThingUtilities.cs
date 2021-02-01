@@ -1,0 +1,122 @@
+//#define DEBUG
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using RimWorld;
+using Verse;
+using Verse.AI;
+
+namespace MyRoom.Common
+{
+    public static class ThingUtilities
+    {
+        public static bool IsPretty(this Thing x)
+        {
+            var thingToCheck = x.GetInnerIfMinified();
+            return !(thingToCheck is Building_Bed) && thingToCheck.GetStatValue(StatDefOf.Beauty) > 10f;
+        }
+
+        public static float GetBeautifulValue(this Thing x)
+        {
+            return Math.Max(x?.GetInnerIfMinified().GetStatValue(StatDefOf.Beauty) ?? 0f, 0f);
+        }
+
+        public static bool IsBetterBed(this Thing bed, Pawn pawn, Building_Bed myBed)
+        {
+            return false;
+            //return bed.MarketValue > myBed.MarketValue;
+        }
+
+        private static bool IsNextToBorder(IntVec3 cell, IEnumerable<IntVec3> borderCells)
+        {
+            for (var i = 0; i < 8; i++)
+            {
+                if (borderCells.Contains(cell + GenAdj.AdjacentCells[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool PlaceThing(this Thing wanted, Pawn pawn, IEnumerable<IntVec3> roomCells, Rot4 rot, Room room,
+            out Job furnitureJobResult)
+        {
+            var defToPlace = wanted.GetInnerIfMinified().def;
+            rot = defToPlace.rotatable ? rot : Rot4.North;
+            var roomBorder = room.BorderCells;
+            var wallCells = roomCells.Where(cell => IsNextToBorder(cell, roomBorder)).InRandomOrder();
+            var innerCells = roomCells.Where(cell => !wallCells.Contains(cell)).InRandomOrder();
+            var firstList = true;
+            foreach (var listOfCells in new List<IEnumerable<IntVec3>> { wallCells, innerCells })
+            {
+                foreach (var vec3 in listOfCells)
+                {
+                    var placeRot = rot;
+                    if (defToPlace.rotatable && firstList)
+                    {
+                        for (var i = 0; i < 4; i++)
+                        {
+                            if (!roomCells.Contains(vec3 + GenAdj.CardinalDirections[i]))
+                            {
+                                placeRot = new Rot4(i).Opposite;
+#if DEBUG
+                                Log.Message($"Found cell next to a wall, will place with rotation {placeRot}");
+#endif
+                                if (new System.Random().Next(2) == 0)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (defToPlace.size.Area > 1)
+                    {
+                        var cellsCovered = GenAdj.OccupiedRect(vec3, placeRot, defToPlace.Size);
+                        if(cellsCovered.Where(cell => !roomCells.Contains(cell)).Count() > 0)
+                        {
+#if DEBUG
+                        Log.Message("Placed furniture would cover a non-room cell (probably the door-entrance)");
+#endif
+                            continue;
+                        }
+                    }
+                    if (!GenConstruct.CanPlaceBlueprintAt(defToPlace, vec3, placeRot, room.Map).Accepted)
+                    {
+#if DEBUG
+                        Log.Message("Not Place-able");
+#endif
+                        continue;
+                    }
+
+                    var bp = wanted.BlueprintInstall(pawn, vec3, room, placeRot);
+
+                    if (bp == null)
+                    {
+#if DEBUG
+                        Log.Message("Couldn't place blueprint, oops");
+#endif
+                        continue;
+                    }
+
+                    var job = bp.InstallJob(pawn);
+
+                    if (job != null)
+                    {
+                        {
+                            furnitureJobResult = job;
+                            return true;
+                        }
+                    }
+#if DEBUG
+                    Log.Message("No job for bp");
+#endif
+                }
+                firstList = false;
+            }
+
+            furnitureJobResult = null;
+            return false;
+        }
+    }
+}
