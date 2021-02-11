@@ -1,4 +1,5 @@
 //#define DEBUG
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace MyRoom.Common
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -48,7 +50,7 @@ namespace MyRoom.Common
             var wallCells = roomCells.Where(cell => IsNextToBorder(cell, roomBorder)).InRandomOrder();
             var innerCells = roomCells.Where(cell => !wallCells.Contains(cell)).InRandomOrder();
             var firstList = true;
-            foreach (var listOfCells in new List<IEnumerable<IntVec3>> { wallCells, innerCells })
+            foreach (var listOfCells in new List<IEnumerable<IntVec3>> {wallCells, innerCells})
             {
                 foreach (var vec3 in listOfCells)
                 {
@@ -63,17 +65,18 @@ namespace MyRoom.Common
 #if DEBUG
                                 Log.Message($"Found cell next to a wall, will place with rotation {placeRot}");
 #endif
-                                if (new System.Random().Next(2) == 0)
+                                if (new Random().Next(2) == 0)
                                 {
                                     break;
                                 }
                             }
                         }
                     }
+
                     if (defToPlace.size.Area > 1)
                     {
                         var cellsCovered = GenAdj.OccupiedRect(vec3, placeRot, defToPlace.Size);
-                        if(cellsCovered.Where(cell => !roomCells.Contains(cell)).Count() > 0)
+                        if (cellsCovered.Any(cell => !roomCells.Contains(cell)))
                         {
 #if DEBUG
                         Log.Message("Placed furniture would cover a non-room cell (probably the door-entrance)");
@@ -81,6 +84,7 @@ namespace MyRoom.Common
                             continue;
                         }
                     }
+
                     if (!GenConstruct.CanPlaceBlueprintAt(defToPlace, vec3, placeRot, room.Map).Accepted)
                     {
 #if DEBUG
@@ -112,6 +116,7 @@ namespace MyRoom.Common
                     Log.Message("No job for bp");
 #endif
                 }
+
                 firstList = false;
             }
 

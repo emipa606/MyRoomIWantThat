@@ -6,9 +6,9 @@
       <li Class="MyRoom.ThinkNode_InstallFurniture" />
       <!-- stealing spree -->
       <li Class="ThinkNode_ConditionalMentalStateClass">
-        <stateClass>MyRoom.MentalState_StealToRoom</stateClass>
+        <stateClass>MyRoom.StealMentalBreak.MentalState_StealToRoom</stateClass>
         <subNodes>
-          <li Class="MyRoom.JobGiver_StealFurniture" />
+          <li Class="MyRoom.StealMentalBreak.JobGiver_StealFurniture" />
           <li Class="JobGiver_WanderColony" />
         </subNodes>
       </li>

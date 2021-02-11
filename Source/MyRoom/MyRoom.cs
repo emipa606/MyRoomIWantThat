@@ -30,10 +30,22 @@ namespace MyRoom
             listing_Standard.Gap();
             listing_Standard.Label("Improve rooms frequency multiplier");
             listing_Standard.Gap();
-            Settings.timerMultipier = Widgets.HorizontalSlider(listing_Standard.GetRect(20), Settings.timerMultipier, 100f, 0.1f, true, null, "Seldom", "Often");
+            Settings.timerMultiplier = Widgets.HorizontalSlider(listing_Standard.GetRect(20), Settings.timerMultiplier,
+                100f, 0.1f, true, null, "Seldom", "Often");
             listing_Standard.Gap();
-            listing_Standard.Label("Wanted impressiveness: " + RoomStatDefOf.Impressiveness.GetScoreStage(Settings.impressivenessWanted).label, -1, "Pawns will try to improve their room to this score");
-            Settings.impressivenessWanted = Widgets.HorizontalSlider(listing_Standard.GetRect(20), Settings.impressivenessWanted, 0, 250f, false, Settings.impressivenessWanted.ToString(), null, null, 1);
+            listing_Standard.Label(
+                "Wanted impressiveness: " +
+                RoomStatDefOf.Impressiveness.GetScoreStage(Settings.impressivenessWanted).label, -1,
+                "Pawns will try to improve their room to this score");
+            Settings.impressivenessWanted = Widgets.HorizontalSlider(listing_Standard.GetRect(20),
+                Settings.impressivenessWanted, 0, 250f, false, Settings.impressivenessWanted.ToString(), null, null, 1);
+            listing_Standard.Gap();
+            listing_Standard.Label(
+                "Minimum space needed: " +
+                RoomStatDefOf.Space.GetScoreStage(Settings.spaceWanted).label, -1,
+                "Pawns will not improve their room if the room have less space than this value");
+            Settings.spaceWanted = Widgets.HorizontalSlider(listing_Standard.GetRect(20),
+                Settings.spaceWanted, 0, 350f, false, Settings.spaceWanted.ToString(), null, null, 1);
             listing_Standard.Gap();
             listing_Standard.Label("Ascetic pawns will not improve their room, Greedy will always do it");
             listing_Standard.End();
@@ -43,14 +55,16 @@ namespace MyRoom
 
     public class MyModSettings : ModSettings
     {
-        public float timerMultipier = 1.0f;
         public float impressivenessWanted = 50f;
+        public float spaceWanted = 30f;
+        public float timerMultiplier = 1.0f;
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref timerMultipier, "TimerMultipier", 1.0f);
-            Scribe_Values.Look(ref impressivenessWanted, "ImpressivenessWanted", 50f, false);
+            Scribe_Values.Look(ref timerMultiplier, "TimerMultipier", 1.0f);
+            Scribe_Values.Look(ref impressivenessWanted, "ImpressivenessWanted", 50f);
+            Scribe_Values.Look(ref spaceWanted, "SpaceWanted", 30f);
         }
     }
 }

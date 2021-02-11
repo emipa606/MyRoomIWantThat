@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using MyRoom.Common;
 using RimWorld;
 using Verse;
@@ -11,7 +10,7 @@ namespace MyRoom
     {
         public override int Commonality()
         {
-            return (int)((MyRoom.latest.timerMultipier * 13 * Find.Maps.Sum(x => x.mapPawns.ColonistCount)) + 1);
+            return (int) ((MyRoom.latest.timerMultiplier * 13 * Find.Maps.Sum(x => x.mapPawns.ColonistCount)) + 1);
         }
 
         public override Job FurnitureJob(Pawn pawn, Building_Bed myBed, Room myRoom)
@@ -20,20 +19,34 @@ namespace MyRoom
             {
                 return null;
             }
+
             if (myRoom.IsRoomTooNice(pawn))
             {
                 return null;
             }
-            var minifiedThings = pawn.Map.listerThings.ThingsOfDef(ThingDefOf.MinifiedThing);
-            var possibleThings = minifiedThings.Where(x =>
-                                    pawn.WantThat(x, myBed)
-                                    && pawn.CanReserve(x)
-                                    && NoPlans(x));
-            if (possibleThings.Count() == 0)
+
+            if (myRoom.IsRoomTooCramped())
             {
                 return null;
             }
-            possibleThings.TryRandomElementByWeight(x => x.GetBeautifulValue(), out var wanted);
+
+            if (myRoom.HasAlreadyBluePrint())
+            {
+                return null;
+            }
+
+            var minifiedThings = pawn.Map.listerThings.ThingsOfDef(ThingDefOf.MinifiedThing);
+            var possibleThings = minifiedThings.Where(x =>
+                pawn.WantThat(x, myBed)
+                && pawn.CanReserve(x)
+                && NoPlans(x));
+            var enumerable = possibleThings.ToList();
+            if (!enumerable.Any())
+            {
+                return null;
+            }
+
+            enumerable.TryRandomElementByWeight(x => x.GetBeautifulValue(), out var wanted);
             //order thing installed in my room!
             if (wanted == null)
             {

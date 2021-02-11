@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
@@ -10,8 +9,21 @@ namespace MyRoom.Common
     {
         public static bool IsRoomTooNice(this Room room, Pawn pawn)
         {
-            RoomStatDef roomStatDef = RoomStatDefOf.Impressiveness;
+            var roomStatDef = RoomStatDefOf.Impressiveness;
             return room.GetStat(roomStatDef) > pawn.MinWantedNice();
+        }
+
+        public static bool IsRoomTooCramped(this Room room)
+        {
+            var roomStatDef = RoomStatDefOf.Space;
+            return room.GetStat(roomStatDef) < MyRoom.latest.spaceWanted;
+        }
+
+        public static bool HasAlreadyBluePrint(this Room room)
+        {
+            return (from Thing blueprint in room.ContainedAndAdjacentThings
+                where blueprint is Blueprint
+                select blueprint).Any();
         }
 
         public static List<IntVec3> CellsNotNextToDoorCardinal(this Room room)
@@ -34,16 +46,8 @@ namespace MyRoom.Common
                     cells.Remove(cell);
                 }
             }
-            
+
             return cells;
-        }
-
-
-        [Obsolete("MyRoom is deprecated, use the builtin pawn.ownership.OwnedRoom")]
-        public static List<Room> MyRoom(List<Building_Bed> myBed)
-        {
-            var myRoom = myBed?.Select(x => x.GetRoom()).ToList();
-            return myRoom;
         }
     }
 }

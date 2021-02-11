@@ -15,8 +15,8 @@
   </MentalBreakDef>
   <MentalStateDef ParentName="BaseMentalState">
     <defName>Steal_OwnRoom</defName>
-    <stateClass>MyRoom.MentalState_StealToRoom</stateClass>
-    <workerClass>MyRoom.MentalStateWorker_StealToRoom</workerClass>
+    <stateClass>MyRoom.StealMentalBreak.MentalState_StealToRoom</stateClass>
+    <workerClass>MyRoom.StealMentalBreak.MentalStateWorker_StealToRoom</workerClass>
     <label>stealing furniture</label>
     <category>Misc</category>
     <minTicksBeforeRecovery>3000</minTicksBeforeRecovery>

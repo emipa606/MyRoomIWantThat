@@ -6,13 +6,13 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace MyRoom
+namespace MyRoom.StealMentalBreak
 {
     public class MentalState_StealToRoom : MentalState
     {
+        private bool insultedTargetAtLeastOnce;
+        private int lastInsultTicks = -999999;
         public Thing target;
-        public int lastInsultTicks = -999999;
-        public bool insultedTargetAtLeastOnce;
         private int targetFoundTicks;
 
         public override void ExposeData()
@@ -55,7 +55,7 @@ namespace MyRoom
         // Token: 0x06003C54 RID: 15444 RVA: 0x001C610C File Offset: 0x001C450C
         private void ChooseNextTarget()
         {
-            List<Thing> candidates = Candidates();
+            var candidates = Candidates();
             if (!candidates.Any())
             {
                 target = null;
@@ -83,10 +83,11 @@ namespace MyRoom
         private List<Thing> Candidates()
         {
             var room = pawn.ownership.OwnedRoom;
-            if(room== null)
+            if (room == null)
             {
                 return null;
             }
+
             var movable = pawn.Map.listerThings.AllThings.Where(x =>
                     pawn.CanReserve(x) && x.def.Minifiable && NoPlan(x))
                 .ToList();

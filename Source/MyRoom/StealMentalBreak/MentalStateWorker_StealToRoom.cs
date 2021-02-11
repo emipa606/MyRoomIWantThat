@@ -1,8 +1,7 @@
-using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace MyRoom
+namespace MyRoom.StealMentalBreak
 {
     public class MentalStateWorker_StealToRoom : MentalStateWorker
     {
@@ -13,8 +12,9 @@ namespace MyRoom
             {
                 return false;
             }
-            Building_Bed ownedBed = pawn.ownership.OwnedBed;
-            return ownedBed != null && ownedBed.GetRoom(RegionType.Set_Passable) != null && !ownedBed.GetRoom(RegionType.Set_Passable).PsychologicallyOutdoors;
+
+            var ownedBed = pawn.ownership.OwnedBed;
+            return ownedBed?.GetRoom() != null && !ownedBed.GetRoom().PsychologicallyOutdoors;
         }
     }
 }

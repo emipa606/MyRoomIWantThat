@@ -11,7 +11,9 @@ namespace MyRoom.Common
         [Obsolete("MyBeds is deprecated, use the builtin pawn.ownership.OwnedBed")]
         public static List<Building_Bed> MyBeds(this Pawn pawn)
         {
-            var myBed = (from Building_Bed bed in pawn.Map.listerBuildings.allBuildingsColonist where bed is Building_Bed && bed.GetAssignedPawns() != null && bed.GetAssignedPawns().Contains(pawn) select bed).ToList();
+            var myBed = (from Building_Bed bed in pawn.Map.listerBuildings.allBuildingsColonist
+                where bed?.GetAssignedPawns() != null && bed.GetAssignedPawns().Contains(pawn)
+                select bed).ToList();
             //allRooms = pawn.Map.regionGrid.allRooms;
             return myBed;
         }
@@ -22,10 +24,12 @@ namespace MyRoom.Common
             {
                 return 0f;
             }
+
             if (IsGreedy(pawn))
             {
                 return float.MaxValue;
             }
+
             return MyRoom.latest.impressivenessWanted;
         }
 
@@ -39,6 +43,7 @@ namespace MyRoom.Common
         {
             return pawn.story.traits.HasTrait(TraitDefOf.Greedy);
         }
+
         private static bool IsAscetic(this Pawn pawn)
         {
             return pawn.story.traits.HasTrait(TraitDefOf.Ascetic);
@@ -46,7 +51,7 @@ namespace MyRoom.Common
 
         public static bool WantThat(this Pawn pawn, Thing x, Building_Bed myBed)
         {
-            return x.IsPretty() || ThingUtilities.IsBetterBed(x, pawn, myBed);
+            return x.IsPretty() || x.IsBetterBed(pawn, myBed);
         }
     }
 }

@@ -2,7 +2,7 @@ using MyRoom.Common;
 using Verse;
 using Verse.AI;
 
-namespace MyRoom
+namespace MyRoom.StealMentalBreak
 {
     public class JobGiver_StealFurniture : ThinkNode_JobGiver
     {
@@ -19,6 +19,7 @@ namespace MyRoom
             {
                 return null;
             }
+
             if (mentalState.target.PlaceThing(pawn, myRoom.CellsNotNextToDoorCardinal(),
                 mentalState.target.def.rotatable ? Rot4.Random : Rot4.North,
                 myRoom, out var furnitureJob1))

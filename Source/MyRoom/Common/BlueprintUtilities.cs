@@ -37,15 +37,15 @@ namespace MyRoom.Common
                 return null;
             }
 
-            return !pawn.CanReserve(miniToInstallOrBuildingToReinstall, 1, -1, null, false)
+            return !pawn.CanReserve(miniToInstallOrBuildingToReinstall)
                 ? null
                 : new Job(JobDefOf.HaulToContainer)
-            {
-                targetA = miniToInstallOrBuildingToReinstall,
-                targetB = install,
-                count = 1,
-                haulMode = HaulMode.ToContainer
-            };
+                {
+                    targetA = miniToInstallOrBuildingToReinstall,
+                    targetB = install,
+                    count = 1,
+                    haulMode = HaulMode.ToContainer
+                };
         }
     }
 }
