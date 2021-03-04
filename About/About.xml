@@ -16,10 +16,12 @@ Update of AliceCecils mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=1541796376
 
 - Added setting for level of impressiveness wanted
+- Added setting for minimum space wanted
 - Pawns will not place larger items where they block the doorway
 - Pawns will try to place items along the wall if possible
 - Rotatable objects placed along a wall will face outwards
 - Pawns will not add beds to their room (I will see if I can make them replace their bed instead)
+- Pawns will not try to place multiple blueprints in one room at the same time
 
 [img]https://i.imgur.com/7Gzt3Rg.png[/img]
 

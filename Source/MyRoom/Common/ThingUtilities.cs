@@ -59,16 +59,18 @@ namespace MyRoom.Common
                     {
                         for (var i = 0; i < 4; i++)
                         {
-                            if (!roomCells.Contains(vec3 + GenAdj.CardinalDirections[i]))
+                            if (roomCells.Contains(vec3 + GenAdj.CardinalDirections[i]))
                             {
-                                placeRot = new Rot4(i).Opposite;
+                                continue;
+                            }
+
+                            placeRot = new Rot4(i).Opposite;
 #if DEBUG
                                 Log.Message($"Found cell next to a wall, will place with rotation {placeRot}");
 #endif
-                                if (new Random().Next(2) == 0)
-                                {
-                                    break;
-                                }
+                            if (new Random().Next(2) == 0)
+                            {
+                                break;
                             }
                         }
                     }
@@ -93,6 +95,14 @@ namespace MyRoom.Common
                         continue;
                     }
 
+                    if (vec3.GetFirstBuilding(room.Map)?.def == defToPlace)
+                    {
+#if DEBUG
+                        Log.Message("Placed furniture would have replaced an item");
+#endif
+                        continue;
+                    }
+
                     var bp = wanted.BlueprintInstall(pawn, vec3, room, placeRot);
 
                     if (bp == null)
@@ -105,13 +115,13 @@ namespace MyRoom.Common
 
                     var job = bp.InstallJob(pawn);
 
-                    if (job != null)
+                    if (job == null)
                     {
-                        {
-                            furnitureJobResult = job;
-                            return true;
-                        }
+                        continue;
                     }
+
+                    furnitureJobResult = job;
+                    return true;
 #if DEBUG
                     Log.Message("No job for bp");
 #endif
