@@ -1,4 +1,5 @@
 ﻿//#define DEBUG
+
 using System.Collections.Generic;
 using MyRoom.Common;
 using RimWorld;
@@ -20,6 +21,7 @@ namespace MyRoom
             {
                 return null;
             }
+
             var movable = new List<Thing>();
             foreach (var thing in myRoom.ContainedAndAdjacentThings)
             {

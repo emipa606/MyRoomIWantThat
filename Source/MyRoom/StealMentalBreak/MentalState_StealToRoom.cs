@@ -71,12 +71,14 @@ namespace MyRoom.StealMentalBreak
                     thing = candidates.Where(x => x != target).RandomElementByWeight(GetCandidateWeight);
                 }
 
-                if (thing != null && thing != target && NoPlan(thing))
+                if (thing == null || thing == target || !NoPlan(thing))
                 {
-                    target = thing;
-                    insultedTargetAtLeastOnce = false;
-                    targetFoundTicks = Find.TickManager.TicksGame;
+                    return;
                 }
+
+                target = thing;
+                insultedTargetAtLeastOnce = false;
+                targetFoundTicks = Find.TickManager.TicksGame;
             }
         }
 
