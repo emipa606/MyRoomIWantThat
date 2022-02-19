@@ -1,6 +1,6 @@
 # MyRoomIWantThat
 
-![Image](https://i.imgur.com/WAEzk68.png)
+![Image](https://i.imgur.com/buuPQel.png)
 
 Update of AliceCecils mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=1541796376
@@ -13,19 +13,10 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1541796376
 - Pawns will not add beds to their room (I will see if I can make them replace their bed instead)
 - Pawns will not try to place multiple blueprints in one room at the same time
 
-![Image](https://i.imgur.com/7Gzt3Rg.png)
+![Image](https://i.imgur.com/pufA0kM.png)
 
-
-[table]
-    [tr]
-        [td]https://invite.gg/Mlie]![Image](https://i.imgur.com/zdzzBrc.png)
-[/td]
-        [td]https://github.com/emipa606/MyRoomIWantThat]![Image](https://i.imgur.com/kTkpTOE.png)
-[/td]
-    [/tr]
-[/table]
 	
-![Image](https://i.imgur.com/NOW7jU1.png)
+![Image](https://i.imgur.com/Z4GOv8H.png)
 
 Pawns do stuff to their own rooms from available minified things.
 
@@ -37,7 +28,7 @@ and Astetics will never.
 
 pawns will rarely rearrange their rooms as well.
 
-![Image](https://i.imgur.com/Rs6T6cr.png)
+![Image](https://i.imgur.com/PwoNOj4.png)
 
 
 

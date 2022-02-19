@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>MyRoom - I want that (Continued)</name>
   <packageId>Mlie.MyRoomIWantThat</packageId>
@@ -12,7 +12,7 @@
   </supportedVersions>
   <modDependencies />
   <loadAfter />
-  <description>[img]https://i.imgur.com/WAEzk68.png[/img]
+  <description>[img]https://i.imgur.com/buuPQel.png[/img]
 Update of AliceCecils mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=1541796376
 
@@ -24,7 +24,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1541796376
 - Pawns will not add beds to their room (I will see if I can make them replace their bed instead)
 - Pawns will not try to place multiple blueprints in one room at the same time
 
-[img]https://i.imgur.com/7Gzt3Rg.png[/img]
+[img]https://i.imgur.com/pufA0kM.png[/img]
 
 [table]
     [tr]
@@ -33,7 +33,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1541796376
     [/tr]
 [/table]
 	
-[img]https://i.imgur.com/NOW7jU1.png[/img]
+[img]https://i.imgur.com/Z4GOv8H.png[/img]
 Pawns do stuff to their own rooms from available minified things.
 
 
@@ -44,7 +44,7 @@ and Astetics will never.
 
 pawns will rarely rearrange their rooms as well.
 
-[img]https://i.imgur.com/Rs6T6cr.png[/img]
+[img]https://i.imgur.com/PwoNOj4.png[/img]
 [list]
 [*] See if the the error persists if you just have this mod and its requirements active.
 [*] If not, try adding your other mods until it happens again.
