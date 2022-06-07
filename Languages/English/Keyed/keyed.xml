@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <MyRoom.Version>Installed mod-version: {0}</MyRoom.Version>
+  <MyRoom.ImproveLabel>Improve rooms frequency multiplier</MyRoom.ImproveLabel>
+  <MyRoom.Seldom>Seldom</MyRoom.Seldom>
+  <MyRoom.Often>Often</MyRoom.Often>
+  <MyRoom.WantedImpressiveness>Wanted impressiveness: {0}</MyRoom.WantedImpressiveness>
+  <MyRoom.WantedImpressiveness.Tooltip>Pawns will try to improve their room to this score</MyRoom.WantedImpressiveness.Tooltip>
+  <MyRoom.MinimumSpace>Minimum space needed: {0}</MyRoom.MinimumSpace>
+  <MyRoom.MinimumSpace.Tooltip>Pawns will not improve their room if the room have less space than this value</MyRoom.MinimumSpace.Tooltip>
+  <MyRoom.TraitInfo>Ascetic pawns will not improve their room, Greedy will always do it</MyRoom.TraitInfo>
+</LanguageData>

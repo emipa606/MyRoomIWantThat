@@ -3,35 +3,34 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace MyRoom
+namespace MyRoom;
+
+public abstract class ThinkNode_FurnitureJob : ThinkNode_JobGiver
 {
-    public abstract class ThinkNode_FurnitureJob : ThinkNode_JobGiver
+    private static short tick;
+
+    protected override Job TryGiveJob(Pawn pawn)
     {
-        private static short tick;
-
-        protected override Job TryGiveJob(Pawn pawn)
+        tick += 1;
+        tick %= 29387;
+        //semi-rare tick
+        if (tick % Math.Min(29387, Commonality()) != 0
+            || !pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation)
+            || !pawn.RaceProps.ToolUser
+            || pawn.IsPrisoner
+            || !pawn.IsColonist)
         {
-            tick += 1;
-            tick %= 29387;
-            //semi-rare tick
-            if (tick % Math.Min(29387, Commonality()) != 0
-                || !pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation)
-                || !pawn.RaceProps.ToolUser
-                || pawn.IsPrisoner
-                || !pawn.IsColonist)
-            {
-                return null;
-            }
-
-            var myBed = pawn.ownership.OwnedBed;
-
-            var myRoom = pawn.ownership.OwnedRoom;
-
-            return myRoom == null ? null : FurnitureJob(pawn, myBed, myRoom);
+            return null;
         }
 
-        public abstract int Commonality();
+        var myBed = pawn.ownership.OwnedBed;
 
-        public abstract Job FurnitureJob(Pawn pawn, Building_Bed myBed, Room myRoom);
+        var myRoom = pawn.ownership.OwnedRoom;
+
+        return myRoom == null ? null : FurnitureJob(pawn, myBed, myRoom);
     }
+
+    public abstract int Commonality();
+
+    public abstract Job FurnitureJob(Pawn pawn, Building_Bed myBed, Room myRoom);
 }

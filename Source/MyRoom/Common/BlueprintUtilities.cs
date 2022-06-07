@@ -2,50 +2,49 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace MyRoom.Common
+namespace MyRoom.Common;
+
+public static class BlueprintUtilities
 {
-    public static class BlueprintUtilities
+    public static Blueprint_Install BlueprintInstall(this Thing wanted, Pawn pawn, IntVec3 vec3, Room room,
+        Rot4 rot)
     {
-        public static Blueprint_Install BlueprintInstall(this Thing wanted, Pawn pawn, IntVec3 vec3, Room room,
-            Rot4 rot)
+        Blueprint_Install bp;
+        if (wanted is MinifiedThing minifiedThing)
         {
-            Blueprint_Install bp;
-            if (wanted is MinifiedThing minifiedThing)
-            {
-                bp = GenConstruct.PlaceBlueprintForInstall(minifiedThing, vec3, room.Map, rot,
-                    pawn.Faction);
-            }
-            else
-            {
-                bp = GenConstruct.PlaceBlueprintForReinstall((Building) wanted, vec3, room.Map, rot,
-                    pawn.Faction);
-            }
-
-            return bp;
+            bp = GenConstruct.PlaceBlueprintForInstall(minifiedThing, vec3, room.Map, rot,
+                pawn.Faction);
+        }
+        else
+        {
+            bp = GenConstruct.PlaceBlueprintForReinstall((Building)wanted, vec3, room.Map, rot,
+                pawn.Faction);
         }
 
-        public static Job InstallJob(this Blueprint_Install install, Pawn pawn)
+        return bp;
+    }
+
+    public static Job InstallJob(this Blueprint_Install install, Pawn pawn)
+    {
+        var miniToInstallOrBuildingToReinstall = install.MiniToInstallOrBuildingToReinstall;
+        if (miniToInstallOrBuildingToReinstall.IsForbidden(pawn))
         {
-            var miniToInstallOrBuildingToReinstall = install.MiniToInstallOrBuildingToReinstall;
-            if (miniToInstallOrBuildingToReinstall.IsForbidden(pawn))
-            {
-                return null;
-            }
-
-            if (!pawn.CanReach(miniToInstallOrBuildingToReinstall, PathEndMode.ClosestTouch, pawn.NormalMaxDanger()))
-            {
-                return null;
-            }
-
-            return !pawn.CanReserve(miniToInstallOrBuildingToReinstall)
-                ? null
-                : new Job(JobDefOf.HaulToContainer)
-                {
-                    targetA = miniToInstallOrBuildingToReinstall,
-                    targetB = install,
-                    count = 1,
-                    haulMode = HaulMode.ToContainer
-                };
+            return null;
         }
+
+        if (!pawn.CanReach(miniToInstallOrBuildingToReinstall, PathEndMode.ClosestTouch, pawn.NormalMaxDanger()))
+        {
+            return null;
+        }
+
+        return !pawn.CanReserve(miniToInstallOrBuildingToReinstall)
+            ? null
+            : new Job(JobDefOf.HaulToContainer)
+            {
+                targetA = miniToInstallOrBuildingToReinstall,
+                targetB = install,
+                count = 1,
+                haulMode = HaulMode.ToContainer
+            };
     }
 }
