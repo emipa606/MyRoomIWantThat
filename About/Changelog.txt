@@ -1,5 +1,8 @@
 # Changelog for MyRoomIWantThat
 
+1.3.3 - Pawns should no longer install forbidden furniture
+
+
 1.3.2 - Better check for mental breaks. Opened the settings to translation.
 
 

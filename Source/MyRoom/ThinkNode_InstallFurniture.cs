@@ -36,10 +36,11 @@ public class ThinkNode_InstallFurniture : ThinkNode_FurnitureJob
         }
 
         var minifiedThings = pawn.Map.listerThings.ThingsOfDef(ThingDefOf.MinifiedThing);
-        var possibleThings = minifiedThings.Where(x =>
-            pawn.WantThat(x, myBed)
-            && pawn.CanReserve(x)
-            && NoPlans(x));
+        var possibleThings = minifiedThings.Where(thing =>
+            pawn.WantThat(thing, myBed)
+            && pawn.CanReserve(thing)
+            && !thing.IsForbidden(pawn)
+            && NoPlans(thing));
         var enumerable = possibleThings.ToList();
         if (!enumerable.Any())
         {
