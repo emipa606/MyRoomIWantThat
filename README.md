@@ -2,7 +2,7 @@
 
 ![Image](https://i.imgur.com/buuPQel.png)
 
-Update of AliceCecils mod
+Update of alicetries mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=1541796376
 
 - Added setting for level of impressiveness wanted

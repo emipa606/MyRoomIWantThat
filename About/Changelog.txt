@@ -1,5 +1,8 @@
 # Changelog for MyRoomIWantThat
 
+1.3.4 - Updated author on demand
+
+
 1.3.3 - Pawns should no longer install forbidden furniture
 
 
