@@ -12,12 +12,7 @@ public static class PawnUtilities
             return 0f;
         }
 
-        if (IsGreedy(pawn))
-        {
-            return float.MaxValue;
-        }
-
-        return MyRoom.latest.impressivenessWanted;
+        return IsGreedy(pawn) ? float.MaxValue : MyRoom.latest.impressivenessWanted;
     }
 
 

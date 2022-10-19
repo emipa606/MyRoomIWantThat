@@ -14,7 +14,7 @@ public static class ThingUtilities
     public static bool IsPretty(this Thing x)
     {
         var thingToCheck = x.GetInnerIfMinified();
-        return !(thingToCheck is Building_Bed) && thingToCheck.GetStatValue(StatDefOf.Beauty) > 10f;
+        return thingToCheck is not Building_Bed && thingToCheck.GetStatValue(StatDefOf.Beauty) > 10f;
     }
 
     public static float GetBeautifulValue(this Thing x)
