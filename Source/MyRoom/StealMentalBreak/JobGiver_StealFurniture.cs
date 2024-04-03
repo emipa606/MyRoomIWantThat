@@ -20,13 +20,10 @@ public class JobGiver_StealFurniture : ThinkNode_JobGiver
             return null;
         }
 
-        if (mentalState.target.PlaceThing(pawn, myRoom.CellsNotNextToDoorCardinal(),
-                mentalState.target.def.rotatable ? Rot4.Random : Rot4.North,
-                myRoom, out var furnitureJob1))
-        {
-            return furnitureJob1;
-        }
-
-        return null;
+        return mentalState.target.PlaceThing(pawn, myRoom.CellsNotNextToDoorCardinal(),
+            mentalState.target.def.rotatable ? Rot4.Random : Rot4.North,
+            myRoom, out var furnitureJobResult)
+            ? furnitureJobResult
+            : null;
     }
 }

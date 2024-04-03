@@ -16,11 +16,6 @@ public static class PawnUtilities
     }
 
 
-    public static int MaxWantedNice(this Pawn pawn)
-    {
-        return IsAscetic(pawn) ? -1 : short.MaxValue;
-    }
-
     private static bool IsGreedy(this Pawn pawn)
     {
         return pawn.story.traits.HasTrait(TraitDefOf.Greedy);

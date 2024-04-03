@@ -17,10 +17,10 @@ public class MyRoom : Mod
         Settings = GetSettings<MyModSettings>();
         latest = Settings;
         currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(ModLister.GetActiveModWithIdentifier("Mlie.MyRoomIWantThat"));
+            VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
 
-    public MyModSettings Settings { get; set; }
+    public MyModSettings Settings { get; }
 
     public override string SettingsCategory()
     {
