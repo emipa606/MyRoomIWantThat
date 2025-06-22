@@ -10,12 +10,12 @@ namespace MyRoom;
 
 public class ThinkNode_MoveMyFurniture : ThinkNode_FurnitureJob
 {
-    public override int Commonality()
+    protected override int Commonality()
     {
         return 4347;
     }
 
-    public override Job FurnitureJob(Pawn pawn, Building_Bed myBed, Room myRoom)
+    protected override Job FurnitureJob(Pawn pawn, Building_Bed myBed, Room myRoom)
     {
         if (myRoom == null)
         {

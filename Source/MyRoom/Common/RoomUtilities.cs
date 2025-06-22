@@ -16,7 +16,7 @@ public static class RoomUtilities
     public static bool IsRoomTooCramped(this Room room)
     {
         var roomStatDef = RoomStatDefOf.Space;
-        return room.GetStat(roomStatDef) < MyRoom.latest.spaceWanted;
+        return room.GetStat(roomStatDef) < MyRoom.Latest.SpaceWanted;
     }
 
     public static bool HasAlreadyBluePrint(this Room room)

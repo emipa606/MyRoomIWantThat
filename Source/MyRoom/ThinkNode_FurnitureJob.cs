@@ -30,7 +30,7 @@ public abstract class ThinkNode_FurnitureJob : ThinkNode_JobGiver
         return myRoom == null ? null : FurnitureJob(pawn, myBed, myRoom);
     }
 
-    public abstract int Commonality();
+    protected abstract int Commonality();
 
-    public abstract Job FurnitureJob(Pawn pawn, Building_Bed myBed, Room myRoom);
+    protected abstract Job FurnitureJob(Pawn pawn, Building_Bed myBed, Room myRoom);
 }

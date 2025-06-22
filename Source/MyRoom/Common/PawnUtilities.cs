@@ -7,21 +7,21 @@ public static class PawnUtilities
 {
     public static float MinWantedNice(this Pawn pawn)
     {
-        if (IsAscetic(pawn))
+        if (isAscetic(pawn))
         {
             return 0f;
         }
 
-        return IsGreedy(pawn) ? float.MaxValue : MyRoom.latest.impressivenessWanted;
+        return isGreedy(pawn) ? float.MaxValue : MyRoom.Latest.ImpressivenessWanted;
     }
 
 
-    private static bool IsGreedy(this Pawn pawn)
+    private static bool isGreedy(this Pawn pawn)
     {
         return pawn.story.traits.HasTrait(TraitDefOf.Greedy);
     }
 
-    private static bool IsAscetic(this Pawn pawn)
+    private static bool isAscetic(this Pawn pawn)
     {
         return pawn.story.traits.HasTrait(TraitDefOf.Ascetic);
     }

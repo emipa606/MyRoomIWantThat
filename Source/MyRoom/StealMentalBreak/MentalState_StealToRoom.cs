@@ -12,14 +12,14 @@ public class MentalState_StealToRoom : MentalState
 {
     private bool insultedTargetAtLeastOnce;
     private int lastInsultTicks = -999999;
-    public Thing target;
+    public Thing Target;
     private int targetFoundTicks;
 
     public override void ExposeData()
     {
         base.ExposeData();
         Scribe_Values.Look(ref targetFoundTicks, "targetFoundTicks");
-        Scribe_References.Look(ref target, "target");
+        Scribe_References.Look(ref Target, "target");
         Scribe_Values.Look(ref insultedTargetAtLeastOnce, "insultedTargetAtLeastOnce");
         Scribe_Values.Look(ref lastInsultTicks, "lastInsultTicks");
     }
@@ -32,56 +32,56 @@ public class MentalState_StealToRoom : MentalState
     public override void PostStart(string reason)
     {
         base.PostStart(reason);
-        ChooseNextTarget();
+        chooseNextTarget();
     }
 
-    public override void MentalStateTick()
+    public override void MentalStateTick(int delta)
     {
-        if (target != null && pawn.CanReach(target.Position, PathEndMode.Touch, Danger.Some))
+        if (Target != null && pawn.CanReach(Target.Position, PathEndMode.Touch, Danger.Some))
         {
-            ChooseNextTarget();
+            chooseNextTarget();
         }
 
-        if (pawn.IsHashIntervalTick(250) && (target == null || insultedTargetAtLeastOnce))
+        if (pawn.IsHashIntervalTick(250, delta) && (Target == null || insultedTargetAtLeastOnce))
         {
-            ChooseNextTarget();
+            chooseNextTarget();
         }
 
-        base.MentalStateTick();
+        base.MentalStateTick(delta);
     }
 
-    private void ChooseNextTarget()
+    private void chooseNextTarget()
     {
-        var candidates = Candidates();
+        var candidates = this.candidates();
         if (candidates?.Any() == false)
         {
-            target = null;
+            Target = null;
             insultedTargetAtLeastOnce = false;
             targetFoundTicks = -1;
             return;
         }
 
         Thing thing = null;
-        if (target != null && Find.TickManager.TicksGame - targetFoundTicks > 1250 &&
-            candidates.Any(x => x != target))
+        if (Target != null && Find.TickManager.TicksGame - targetFoundTicks > 1250 &&
+            candidates.Any(x => x != Target))
         {
             if (candidates != null)
             {
-                thing = candidates.Where(x => x != target).RandomElementByWeight(GetCandidateWeight);
+                thing = candidates.Where(x => x != Target).RandomElementByWeight(getCandidateWeight);
             }
         }
 
-        if (thing == null || thing == target || !NoPlan(thing))
+        if (thing == null || thing == Target || !noPlan(thing))
         {
             return;
         }
 
-        target = thing;
+        Target = thing;
         insultedTargetAtLeastOnce = false;
         targetFoundTicks = Find.TickManager.TicksGame;
     }
 
-    private List<Thing> Candidates()
+    private List<Thing> candidates()
     {
         var room = pawn.ownership.OwnedRoom;
         if (room == null)
@@ -90,7 +90,7 @@ public class MentalState_StealToRoom : MentalState
         }
 
         var movable = pawn.Map.listerThings.AllThings.Where(x =>
-                pawn.CanReserve(x) && x.def.Minifiable && NoPlan(x))
+                pawn.CanReserve(x) && x.def.Minifiable && noPlan(x))
             .ToList();
         foreach (var thing in room.ContainedAndAdjacentThings)
         {
@@ -100,12 +100,12 @@ public class MentalState_StealToRoom : MentalState
         return movable;
     }
 
-    private static bool NoPlan(Thing x)
+    private static bool noPlan(Thing x)
     {
         return InstallBlueprintUtility.ExistingBlueprintFor(x) == null;
     }
 
-    private float GetCandidateWeight(Thing candidate)
+    private float getCandidateWeight(Thing candidate)
     {
         var num = pawn.Position.DistanceTo(candidate.Position);
         var num2 = Mathf.Min(num / 40f, 1f);

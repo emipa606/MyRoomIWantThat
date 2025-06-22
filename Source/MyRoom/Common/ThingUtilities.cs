@@ -25,14 +25,14 @@ public static class ThingUtilities
     public static bool IsBetterBed(this Thing bed, Pawn pawn, Building_Bed myBed)
     {
         return false;
-        //return bed.MarketValue > myBed.MarketValue;
     }
 
-    private static bool IsNextToBorder(IntVec3 cell, IEnumerable<IntVec3> borderCells)
+    private static bool isNextToBorder(IntVec3 cell, IEnumerable<IntVec3> borderCells)
     {
         for (var i = 0; i < 8; i++)
         {
-            if (borderCells.Contains(cell + GenAdj.AdjacentCells[i]))
+            var borderCellsArray = borderCells as IntVec3[] ?? borderCells.ToArray();
+            if (borderCellsArray.Contains(cell + GenAdj.AdjacentCells[i]))
             {
                 return true;
             }
@@ -47,8 +47,9 @@ public static class ThingUtilities
         var defToPlace = wanted.GetInnerIfMinified().def;
         rot = defToPlace.rotatable ? rot : Rot4.North;
         var roomBorder = room.BorderCells;
-        var wallCells = roomCells.Where(cell => IsNextToBorder(cell, roomBorder)).InRandomOrder();
-        var innerCells = roomCells.Where(cell => !wallCells.Contains(cell)).InRandomOrder();
+        var roomCellsArray = roomCells as IntVec3[] ?? roomCells.ToArray();
+        var wallCells = roomCellsArray.Where(cell => isNextToBorder(cell, roomBorder)).InRandomOrder();
+        var innerCells = roomCellsArray.Where(cell => !wallCells.Contains(cell)).InRandomOrder();
         var firstList = true;
         foreach (var listOfCells in new List<IEnumerable<IntVec3>> { wallCells, innerCells })
         {
@@ -59,7 +60,7 @@ public static class ThingUtilities
                 {
                     for (var i = 0; i < 4; i++)
                     {
-                        if (roomCells.Contains(vec3 + GenAdj.CardinalDirections[i]))
+                        if (roomCellsArray.Contains(vec3 + GenAdj.CardinalDirections[i]))
                         {
                             continue;
                         }
@@ -78,7 +79,7 @@ public static class ThingUtilities
                 if (defToPlace.size.Area > 1)
                 {
                     var cellsCovered = GenAdj.OccupiedRect(vec3, placeRot, defToPlace.Size);
-                    if (cellsCovered.Any(cell => !roomCells.Contains(cell)))
+                    if (cellsCovered.Any(cell => !roomCellsArray.Contains(cell)))
                     {
 #if DEBUG
                         Log.Message("Placed furniture would cover a non-room cell (probably the door-entrance)");

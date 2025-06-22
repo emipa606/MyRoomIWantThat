@@ -9,18 +9,18 @@ namespace MyRoom;
 
 public class MyRoom : Mod
 {
-    public static MyModSettings latest;
+    public static MyModSettings Latest;
     private static string currentVersion;
 
     public MyRoom(ModContentPack content) : base(content)
     {
         Settings = GetSettings<MyModSettings>();
-        latest = Settings;
+        Latest = Settings;
         currentVersion =
             VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
 
-    public MyModSettings Settings { get; }
+    private MyModSettings Settings { get; }
 
     public override string SettingsCategory()
     {
@@ -29,53 +29,53 @@ public class MyRoom : Mod
 
     public override void DoSettingsWindowContents(Rect inRect)
     {
-        var listing_Standard = new Listing_Standard();
-        listing_Standard.Begin(inRect);
-        listing_Standard.Gap();
-        listing_Standard.Label("MyRoom.ImproveLabel".Translate());
-        listing_Standard.Gap();
-        Settings.timerMultiplier = Widgets.HorizontalSlider(listing_Standard.GetRect(20), Settings.timerMultiplier,
+        var listingStandard = new Listing_Standard();
+        listingStandard.Begin(inRect);
+        listingStandard.Gap();
+        listingStandard.Label("MyRoom.ImproveLabel".Translate());
+        listingStandard.Gap();
+        Settings.TimerMultiplier = Widgets.HorizontalSlider(listingStandard.GetRect(20), Settings.TimerMultiplier,
             100f, 0.1f, true, null, "MyRoom.Seldom".Translate(), "MyRoom.Often".Translate());
-        listing_Standard.Gap();
-        listing_Standard.Label(
+        listingStandard.Gap();
+        listingStandard.Label(
             "MyRoom.WantedImpressiveness".Translate(RoomStatDefOf.Impressiveness
-                .GetScoreStage(Settings.impressivenessWanted).label)
+                .GetScoreStage(Settings.ImpressivenessWanted).label)
             , -1,
             "MyRoom.WantedImpressiveness.Tooltip".Translate());
-        Settings.impressivenessWanted = Widgets.HorizontalSlider(listing_Standard.GetRect(20),
-            Settings.impressivenessWanted, 0, 250f, false, Settings.impressivenessWanted.ToString(), null, null, 1);
-        listing_Standard.Gap();
-        listing_Standard.Label(
-            "MyRoom.MinimumSpace".Translate(RoomStatDefOf.Space.GetScoreStage(Settings.spaceWanted).label), -1,
+        Settings.ImpressivenessWanted = Widgets.HorizontalSlider(listingStandard.GetRect(20),
+            Settings.ImpressivenessWanted, 0, 250f, false, Settings.ImpressivenessWanted.ToString(), null, null, 1);
+        listingStandard.Gap();
+        listingStandard.Label(
+            "MyRoom.MinimumSpace".Translate(RoomStatDefOf.Space.GetScoreStage(Settings.SpaceWanted).label), -1,
             "MyRoom.MinimumSpace.Tooltip".Translate());
-        Settings.spaceWanted = Widgets.HorizontalSlider(listing_Standard.GetRect(20),
-            Settings.spaceWanted, 0, 350f, false, Settings.spaceWanted.ToString(), null, null, 1);
-        listing_Standard.Gap();
-        listing_Standard.Label("MyRoom.TraitInfo".Translate());
+        Settings.SpaceWanted = Widgets.HorizontalSlider(listingStandard.GetRect(20),
+            Settings.SpaceWanted, 0, 350f, false, Settings.SpaceWanted.ToString(), null, null, 1);
+        listingStandard.Gap();
+        listingStandard.Label("MyRoom.TraitInfo".Translate());
         if (currentVersion != null)
         {
-            listing_Standard.Gap();
+            listingStandard.Gap();
             GUI.contentColor = Color.gray;
-            listing_Standard.Label("MyRoom.Version".Translate(currentVersion));
+            listingStandard.Label("MyRoom.Version".Translate(currentVersion));
             GUI.contentColor = Color.white;
         }
 
-        listing_Standard.End();
+        listingStandard.End();
         Settings.Write();
     }
 }
 
 public class MyModSettings : ModSettings
 {
-    public float impressivenessWanted = 50f;
-    public float spaceWanted = 30f;
-    public float timerMultiplier = 1.0f;
+    public float ImpressivenessWanted = 50f;
+    public float SpaceWanted = 30f;
+    public float TimerMultiplier = 1.0f;
 
     public override void ExposeData()
     {
         base.ExposeData();
-        Scribe_Values.Look(ref timerMultiplier, "TimerMultipier", 1.0f);
-        Scribe_Values.Look(ref impressivenessWanted, "ImpressivenessWanted", 50f);
-        Scribe_Values.Look(ref spaceWanted, "SpaceWanted", 30f);
+        Scribe_Values.Look(ref TimerMultiplier, "TimerMultipier", 1.0f);
+        Scribe_Values.Look(ref ImpressivenessWanted, "ImpressivenessWanted", 50f);
+        Scribe_Values.Look(ref SpaceWanted, "SpaceWanted", 30f);
     }
 }

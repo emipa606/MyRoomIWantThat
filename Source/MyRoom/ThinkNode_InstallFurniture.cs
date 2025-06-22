@@ -8,12 +8,12 @@ namespace MyRoom;
 
 public class ThinkNode_InstallFurniture : ThinkNode_FurnitureJob
 {
-    public override int Commonality()
+    protected override int Commonality()
     {
-        return (int)((MyRoom.latest.timerMultiplier * 13 * Find.Maps.Sum(x => x.mapPawns.ColonistCount)) + 1);
+        return (int)((MyRoom.Latest.TimerMultiplier * 13 * Find.Maps.Sum(x => x.mapPawns.ColonistCount)) + 1);
     }
 
-    public override Job FurnitureJob(Pawn pawn, Building_Bed myBed, Room myRoom)
+    protected override Job FurnitureJob(Pawn pawn, Building_Bed myBed, Room myRoom)
     {
         if (myRoom == null)
         {
@@ -40,7 +40,7 @@ public class ThinkNode_InstallFurniture : ThinkNode_FurnitureJob
             pawn.WantThat(thing, myBed)
             && pawn.CanReserve(thing)
             && !thing.IsForbidden(pawn)
-            && NoPlans(thing));
+            && noPlans(thing));
         var enumerable = possibleThings.ToList();
         if (!enumerable.Any())
         {
@@ -57,7 +57,7 @@ public class ThinkNode_InstallFurniture : ThinkNode_FurnitureJob
 
         var rot = Rot4.Random;
         var roomCells = myRoom.CellsNotNextToDoorCardinal();
-        if (wanted.PlaceThing(pawn, roomCells, rot, myRoom, out var furnitureJob1) && NoPlans(wanted))
+        if (wanted.PlaceThing(pawn, roomCells, rot, myRoom, out var furnitureJob1) && noPlans(wanted))
         {
             return furnitureJob1;
         }
@@ -65,7 +65,7 @@ public class ThinkNode_InstallFurniture : ThinkNode_FurnitureJob
         return null;
     }
 
-    private static bool NoPlans(Thing x)
+    private static bool noPlans(Thing x)
     {
         return InstallBlueprintUtility.ExistingBlueprintFor(x) == null;
     }

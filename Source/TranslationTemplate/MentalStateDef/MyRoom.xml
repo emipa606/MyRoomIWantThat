@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: stealing furniture -->
+  <Steal_OwnRoom.label>stealing furniture</Steal_OwnRoom.label>
+  <!-- EN: Mental state: Hording Furniture -->
+  <Steal_OwnRoom.baseInspectLine>Mental state: Hording Furniture</Steal_OwnRoom.baseInspectLine>
+  <!-- EN: {0} is hording furniture to [PAWN_possessive] room. -->
+  <Steal_OwnRoom.beginLetter>{0} is hording furniture to [PAWN_possessive] room.</Steal_OwnRoom.beginLetter>
+  <!-- EN: hide in room -->
+  <Steal_OwnRoom.beginLetterLabel>hide in room</Steal_OwnRoom.beginLetterLabel>
+  <!-- EN: {0} is hording furniture in [PAWN_possessive] room. -->
+  <Steal_OwnRoom.recoveryMessage>{0} is hording furniture in [PAWN_possessive] room.</Steal_OwnRoom.recoveryMessage>
+</LanguageData>
