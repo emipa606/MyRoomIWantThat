@@ -5,29 +5,31 @@ namespace MyRoom.Common;
 
 public static class PawnUtilities
 {
-    public static float MinWantedNice(this Pawn pawn)
+    extension(Pawn pawn)
     {
-        if (isAscetic(pawn))
+        public float MinWantedNice()
         {
-            return 0f;
+            if (pawn.isAscetic())
+            {
+                return 0f;
+            }
+
+            return pawn.isGreedy() ? float.MaxValue : MyRoom.Latest.ImpressivenessWanted;
         }
 
-        return isGreedy(pawn) ? float.MaxValue : MyRoom.Latest.ImpressivenessWanted;
-    }
+        private bool isGreedy()
+        {
+            return pawn.story.traits.HasTrait(TraitDefOf.Greedy);
+        }
 
+        private bool isAscetic()
+        {
+            return pawn.story.traits.HasTrait(TraitDefOf.Ascetic);
+        }
 
-    private static bool isGreedy(this Pawn pawn)
-    {
-        return pawn.story.traits.HasTrait(TraitDefOf.Greedy);
-    }
-
-    private static bool isAscetic(this Pawn pawn)
-    {
-        return pawn.story.traits.HasTrait(TraitDefOf.Ascetic);
-    }
-
-    public static bool WantThat(this Pawn pawn, Thing x, Building_Bed myBed)
-    {
-        return x.IsPretty() || x.IsBetterBed(pawn, myBed);
+        public bool WantThat(Thing x, Building_Bed myBed)
+        {
+            return x.IsPretty() || Thing.IsBetterBed(pawn, myBed);
+        }
     }
 }

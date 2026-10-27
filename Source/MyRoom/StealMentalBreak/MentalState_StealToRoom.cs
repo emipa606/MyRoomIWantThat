@@ -10,9 +10,9 @@ namespace MyRoom.StealMentalBreak;
 
 public class MentalState_StealToRoom : MentalState
 {
+    public Thing Target;
     private bool insultedTargetAtLeastOnce;
     private int lastInsultTicks = -999999;
-    public Thing Target;
     private int targetFoundTicks;
 
     public override void ExposeData()
@@ -63,12 +63,10 @@ public class MentalState_StealToRoom : MentalState
 
         Thing thing = null;
         if (Target != null && Find.TickManager.TicksGame - targetFoundTicks > 1250 &&
-            candidates.Any(x => x != Target))
+            candidates.Any(x => x != Target) &&
+            candidates != null)
         {
-            if (candidates != null)
-            {
-                thing = candidates.Where(x => x != Target).RandomElementByWeight(getCandidateWeight);
-            }
+            thing = candidates.Where(x => x != Target).RandomElementByWeight(getCandidateWeight);
         }
 
         if (thing == null || thing == Target || !noPlan(thing))

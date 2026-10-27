@@ -1,6 +1,6 @@
 # [MyRoom - I want that (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=2381546712)
 
-![Image](https://i.imgur.com/buuPQel.png)
+![Image](https://img.litet.net/logos/Info.png)
 
 Update of alicetries mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=1541796376
@@ -13,9 +13,9 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1541796376
 - Pawns will not add beds to their room (I will see if I can make them replace their bed instead)
 - Pawns will not try to place multiple blueprints in one room at the same time
 
-![Image](https://i.imgur.com/pufA0kM.png)
+![Image](https://img.litet.net/logos/Notice.png)
 	
-![Image](https://i.imgur.com/Z4GOv8H.png)
+![Image](https://img.litet.net/logos/OriginalDescription.png)
 
 Pawns do stuff to their own rooms from available minified things.
 
@@ -27,13 +27,13 @@ and Astetics will never.
 
 pawns will rarely rearrange their rooms as well.
 
-![Image](https://i.imgur.com/PwoNOj4.png)
+![Image](https://img.litet.net/logos/ReportingIssues.png)
 
 
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using [HugsLib](https://steamcommunity.com/workshop/filedetails/?id=818773962) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
+-  Always post your log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
@@ -41,4 +41,4 @@ pawns will rarely rearrange their rooms as well.
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/MyRoomIWantThat?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2381546712) | tags:  home,  arrangement
+[![Image](https://img.shields.io/github/v/release/emipa606/MyRoomIWantThat?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2381546712) | arrangement, home
